@@ -71,23 +71,10 @@ public class Game
         System.out.println("Mundo de Zuul é um jogo de aventura, incrivelmente chato.");
         System.out.println("Digite 'ajuda' se você precisar de ajuda.");
         System.out.println();
-        System.out.println("Você está " + currentRoom.getDescription());
-        System.out.print("Saídas: ");
-        if(currentRoom.northExit != null) {
-            System.out.print("norte ");
-        }
-        if(currentRoom.eastExit != null) {
-            System.out.print("leste ");
-        }
-        if(currentRoom.southExit != null) {
-            System.out.print("sul ");
-        }
-        if(currentRoom.westExit != null) {
-            System.out.print("oeste ");
-        }
-        System.out.println();
-    }
+        printlocationInfo();
+        
 
+        
     /**
      * Dado um comando, processa (ou seja: executa) o comando.
      * @param command O comando a ser processado.
@@ -128,6 +115,27 @@ public class Game
         System.out.println("Seus comandos são:");
         System.out.println("   ir_para sair ajuda");
     }
+    
+    private void printlocationInfo()
+    {
+        System.out.println("Você está " + currentRoom.getDescription());
+        System.out.print("Saídas: ");
+        if (currentRoom.northExit != null){
+            System.out.println("norte  ");
+        }
+          if(currentRoom.eastExit != null) {
+            System.out.print("leste ");
+        }
+        if(currentRoom.southExit != null) {
+            System.out.print("sul ");
+        }
+        if(currentRoom.westExit != null) {
+            System.out.print("oeste ");
+        }
+        System.out.println();
+    }
+  
+    
 
     /** 
      * Tenta ir para uma direção. Se há uma saída, entra na
@@ -163,21 +171,8 @@ public class Game
         }
         else {
             currentRoom = nextRoom;
-            System.out.println("Você está " + currentRoom.getDescription());
-            System.out.print("Saídas: ");
-            if(currentRoom.northExit != null) {
-                System.out.print("norte ");
-            }
-            if(currentRoom.eastExit != null) {
-                System.out.print("leste ");
-            }
-            if(currentRoom.southExit != null) {
-                System.out.print("sul ");
-            }
-            if(currentRoom.westExit != null) {
-                System.out.print("oeste ");
-            }
-            System.out.println();
+            
+            printlocationInfo();
         }
     }
 
