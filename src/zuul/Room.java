@@ -75,10 +75,37 @@ public class Room
         if(direction.equals("oeste")){
             return westExit;           
         }
+        return null        
+    }
+
+      /**
+      *Retorna uma descricao das saidas da sala
+      *por exemplo: "Saidas : norte oeste".
+      *@return Uma descricao das saidas disponiveis .
+      */
+    
+      
                 }
 
+    public String getExitString(){
+        String exitString = "Saidas:  ";
+        if (northExit != null) {
+            exitString += "norte";
+        }
+        if (eastExit != null) {
+            exitString += "leste";
+        }
         
-                }
-
+        if (southExit != null) {
+            exitString += "sul";
+        }
+        
+        if (westExit != null) {
+            exitString += "oeste";
+        }
+        
+        return exitString;
+        
+        
     }
 }
