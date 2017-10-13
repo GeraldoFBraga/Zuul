@@ -119,20 +119,21 @@ public class Game
     private void printlocationInfo()
     {
         System.out.println("Você está " + currentRoom.getDescription());
-        System.out.print("Saídas: ");
-        if (currentRoom.northExit != null){
-            System.out.println("norte  ");
-        }
-          if(currentRoom.eastExit != null) {
-            System.out.print("leste ");
-        }
-        if(currentRoom.southExit != null) {
-            System.out.print("sul ");
-        }
-        if(currentRoom.westExit != null) {
-            System.out.print("oeste ");
-        }
-        System.out.println();
+        System.out.print(currentRoom.getExitString());
+      /*  if (currentRoom.northExit != null){
+      *      System.out.println("norte  ");
+       * }
+        *  if(currentRoom.eastExit != null) {
+        *    System.out.print("leste ");
+        *}
+        *if(currentRoom.southExit != null) {
+        *    System.out.print("sul ");
+        *}
+        *if(currentRoom.westExit != null) {
+        *    System.out.print("oeste ");
+       * }
+       * System.out.println();
+        */
     }
   
     
@@ -152,27 +153,43 @@ public class Game
         String direction = command.getSecondWord();
 
         // Try to leave current room.
-        Room nextRoom = null;
-        if(direction.equals("norte")) {
-            nextRoom = currentRoom.northExit;
-        }
-        if(direction.equals("leste")) {
-            nextRoom = currentRoom.eastExit;
-        }
-        if(direction.equals("sul")) {
-            nextRoom = currentRoom.southExit;
-        }
-        if(direction.equals("oeste")) {
-            nextRoom = currentRoom.westExit;
-        }
-
+        Room nextRoom = current.getexit(direction);
+       
+        
         if (nextRoom == null) {
             System.out.println("Não há uma porta!");
-        }
-        else {
-            currentRoom = nextRoom;
+        } else{
+            currentRoom = next Room;
+            printLocationInfo();
+        
+        
+         currentRoom = nextRoom;  
+         printLocationInfo();
+       
+        
+      
+      /*      if(direction.equals("norte")) {
+      *      nextRoom = currentRoom.northExit;
+      *  }
+      *  else{
+      *  if(direction.equals("leste")) {
+      *      nextRoom = currentRoom.eastExit;
+      *  }
+      *  if(direction.equals("sul")) {
+      *      nextRoom = currentRoom.southExit;
+      *  }
+      *  if(direction.equals("oeste")) {
+      *      nextRoom = currentRoom.westExit;
+      *  }
+
+      *  if (nextRoom == null) {
+       *     System.out.println("Não há uma porta!");
+       * }
+       * else {
+       *     currentRoom = nextRoom;
             
-            printlocationInfo();
+       *     printlocationInfo();
+       */
         }
     }
 
