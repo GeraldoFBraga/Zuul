@@ -1,5 +1,7 @@
 package zuul;
 
+import java.util.HashMap;
+
 /**
  * Class Room - a room in an adventure game.
  *
@@ -14,13 +16,12 @@ package zuul;
  * @author  Michael Kolling and David J. Barnes
  * @version 2008.03.30
  */
-public class Room 
-{
-    public String description;
-    public Room northExit;
-    public Room southExit;
-    public Room eastExit;
-    public Room westExit;
+public class Room {
+    
+    public String description;    
+    private HashMap<String, Room> exits;
+
+    
 
     /**
      * Create a room described "description". Initially, it has
@@ -31,6 +32,7 @@ public class Room
     public Room(String description) 
     {
         this.description = description;
+        exits = new HashMap<>();
     }
 
     /**
@@ -40,17 +42,11 @@ public class Room
      * @param east The east east.
      * @param south The south exit.
      * @param west The west exit.
+     * neightbor Sala vizinha
      */
-    public void setExits(Room north, Room east, Room south, Room west) 
+    public void setExits(String direction, Room neighbor) 
     {
-        if(north != null)
-            northExit = north;
-        if(east != null)
-            eastExit = east;
-        if(south != null)
-            southExit = south;
-        if(west != null)
-            westExit = west;
+       exit.put(direction, neighbor);
     }
 
     /**
@@ -61,51 +57,38 @@ public class Room
         return description;
     }
     public Room getExit(String direction){
-        if(direction.equals("norte")){
-            return northExit;           
-        }
-        if(direction.equals("leste")){
-            return eastExit;           
-        }
         
-        if(direction.equals("sul")){
-            return southExit;           
-        }
+        return exits.get(direction);
         
-        if(direction.equals("oeste")){
-            return westExit;           
-        }
-        return null        
-    }
+       }
 
-      /**
-      *Retorna uma descricao das saidas da sala
-      *por exemplo: "Saidas : norte oeste".
-      *@return Uma descricao das saidas disponiveis .
-      */
+        
+                
+
+   }
+
+public String getExitString(){
     
-      
-                }
-
-    public String getExitString(){
-        String exitString = "Saidas:  ";
-        if (northExit != null) {
-            exitString += "norte";
-        }
-        if (eastExit != null) {
-            exitString += "leste";
-        }
-        
-        if (southExit != null) {
-            exitString += "sul";
-        }
-        
-        if (westExit != null) {
-            exitString += "oeste";
-        }
-        
-        return exitString;
-        
-        
-    }
+    String exitString = "Saidas:";
+        for(String exit : exits.keySet()){
+            exitString += + exit;
 }
+        return exitString;
+}
+
+/*
+Retorna descricao longa dessa sala
+na forma
+vc esta na cozinha
+saidas: norte Oeste
+@return uma descricao da sala, incluindlo saidas
+
+
+*/
+
+public String getDescription(){
+return "Voce está" + description + ".\n" + get eExitsString();
+}
+
+
+
