@@ -41,10 +41,12 @@ public class Game
         // initialise room exits
 
         outside.setExit("leste", theatre);
-        outside.setExit("Sul", lab);
+        outside.setExit("sul", lab);
         outside.setExit("oeste", pub);
         
-        theatre.setExit("leste", outside);
+        theatre.setExit("oeste", outside);
+        
+        pub.setExit("leste", outside);
         
         lab.setExit("norte", outside);
         lab.setExit("leste", office);
