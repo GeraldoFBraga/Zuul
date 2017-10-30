@@ -33,9 +33,9 @@ public class Game
         // create the rooms
         outside = new Room("fora da entrada principal da universidade");
         theatre = new Room("em um auditório");
-        pub = new Room("na cantina do campus");
-        lab = new Room("em um laboratório de informática");
-        office = new Room("na sala dos professores");
+        pub = new Room("na cantina do campus", table);
+        lab = new Room("em um laboratório de informática", chair);
+        office = new Room("na sala dos professores", tv);
         attic = new Room("No sotao do laboratorio");
         
         // initialise room exits
