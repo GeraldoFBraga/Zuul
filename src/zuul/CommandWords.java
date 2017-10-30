@@ -10,7 +10,16 @@ public class CommandWords
     // um array constante que contém todos os comandos válidos
     private static final String[] VALID_COMMANDS = {
         "ir_para", "sair", "ajuda"
+            
+             
     };
+    
+    public String getComandList(){
+        
+        
+        return String.join("", VALID_COMMANDS);
+        
+    }
 
     /**
      * Construtor - inicializa os comandos
@@ -35,4 +44,6 @@ public class CommandWords
         // se chegamos aqui, a string não foi encontrada nos comandos
         return false;
     }
+    
+    
 }

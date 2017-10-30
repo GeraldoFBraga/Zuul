@@ -24,28 +24,34 @@ public class Game
      */
     private void createRooms()
     {
-        Room outside, theatre, pub, lab, office;
-      
+        Room outside, theatre, pub, lab, office, attic;
+        Item table, chair, tv;
+      // cria itens
+        table = new Item("uma mesa",50);
+        chair = new Item ("uma cadeira",20);
+        tv = new Item("TV",15);
         // create the rooms
         outside = new Room("fora da entrada principal da universidade");
         theatre = new Room("em um auditório");
         pub = new Room("na cantina do campus");
         lab = new Room("em um laboratório de informática");
         office = new Room("na sala dos professores");
+        attic = new Room("No sotao do laboratorio");
         
         // initialise room exits
-        outside.setExits("leste", theatre);
-        outside.setExits("sul", lab);
-        outside.setExits("oeste", pub);
+
+        outside.setExit("leste", theatre);
+        outside.setExit("Sul", lab);
+        outside.setExit("oeste", pub);
         
-        theatre.setExits("leste", outside);
+        theatre.setExit("leste", outside);
         
-        lab.setExits("norte", outside);
-        lab.setExits("leste", office);
-        lab.setExits("cima", attic);
+        lab.setExit("norte", outside);
+        lab.setExit("leste", office);
+        lab.setExit("cima", attic);
         
-        attic.setExits("baixo", lab);
-        office.setExits("oeste", lab);
+        attic.setExit("baixo", lab);
+        office.setExit("oeste", lab);
 
         currentRoom = outside;  // Começa o jogo fora 
     }
@@ -80,7 +86,7 @@ public class Game
         System.out.println();
         printlocationInfo();
         
-
+    }
         
     /**
      * Dado um comando, processa (ou seja: executa) o comando.
@@ -101,10 +107,15 @@ public class Game
             printHelp();
         else if (commandWord.equals("ir_para"))
             goRoom(command);
+        else if (commandWord.equals("comer"))
+            comer();
         else if (commandWord.equals("sair"))
             wantToQuit = quit(command);
-
         return wantToQuit;
+    }
+    public void comer(){
+        System.out.println("Voce comeu e agoraq nao esta com fome.");
+        
     }
 
     // implementations of user commands:
@@ -120,27 +131,12 @@ public class Game
         System.out.println("pela universidade.");
         System.out.println();
         System.out.println("Seus comandos são:");
-        System.out.println("   ir_para sair ajuda");
+        System.out.println("");
     }
     
     private void printlocationInfo()
     {
-        System.out.println("Você está " + currentRoom.getDescription());
-        System.out.print(currentRoom.getExitString());
-      /*  if (currentRoom.northExit != null){
-      *      System.out.println("norte  ");
-       * }
-        *  if(currentRoom.eastExit != null) {
-        *    System.out.print("leste ");
-        *}
-        *if(currentRoom.southExit != null) {
-        *    System.out.print("sul ");
-        *}
-        *if(currentRoom.westExit != null) {
-        *    System.out.print("oeste ");
-       * }
-       * System.out.println();
-        */
+        System.out.println( currentRoom.getLongDescription());
     }
   
     
@@ -160,46 +156,21 @@ public class Game
         String direction = command.getSecondWord();
 
         // Try to leave current room.
-        Room nextRoom = current.getexit(direction);
-       
-        
+        Room nextRoom = null;
+        nextRoom = currentRoom.getExit(direction);
+
         if (nextRoom == null) {
             System.out.println("Não há uma porta!");
-        } else{
-            currentRoom = next Room;
-            printLocationInfo();
-        
-        
-         currentRoom = nextRoom;  
-         printLocationInfo();
-       
-        
-      
-      /*      if(direction.equals("norte")) {
-      *      nextRoom = currentRoom.northExit;
-      *  }
-      *  else{
-      *  if(direction.equals("leste")) {
-      *      nextRoom = currentRoom.eastExit;
-      *  }
-      *  if(direction.equals("sul")) {
-      *      nextRoom = currentRoom.southExit;
-      *  }
-      *  if(direction.equals("oeste")) {
-      *      nextRoom = currentRoom.westExit;
-      *  }
-
-      *  if (nextRoom == null) {
-       *     System.out.println("Não há uma porta!");
-       * }
-       * else {
-       *     currentRoom = nextRoom;
+        }
+        else {
+            currentRoom = nextRoom;
             
-       *     printlocationInfo();
-       */
+            printlocationInfo();
         }
     }
-
+    
+    
+            
     /** 
      * "Sair" foi digitado. Verifica o resto do comando para saber
      * se o usuário quer realmente sair do jogo.
