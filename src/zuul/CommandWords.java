@@ -9,10 +9,12 @@ public class CommandWords
 {
     // um array constante que contém todos os comandos válidos
     private static final String[] VALID_COMMANDS = {
-        "ir_para", "sair", "ajuda"
+        "ir_para", "sair", "ajuda", "examinar", "comer", "voltar"
             
              
     };
+    
+    
     
     public String getComandList(){
         
@@ -29,6 +31,14 @@ public class CommandWords
         // nada a fazer no momento...
     }
 
+    public  String getcomandList() {
+        return String.join("", VALID_COMMANDS);
+    }
+    
+    
+    
+    
+
     /**
      * Checa se uma string é uma palavra válida. 
      * @param aString uma string 
@@ -43,6 +53,10 @@ public class CommandWords
         }
         // se chegamos aqui, a string não foi encontrada nos comandos
         return false;
+    }
+
+    String getCommandList() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     

@@ -72,7 +72,7 @@ public class Room {
 
         String exitString = "Saidas: ";
         for (String exit : exits.keySet()) {
-            exitString += exit + " ";
+            exitString += "" + exit;
         }
         return exitString;
     }
@@ -88,7 +88,8 @@ saidas: norte Oeste
      */
     public String getLongDescription() {
         
-        String itemStr = (item !=null)? "Que tem " + item.getDescription() + ".\n"
+        String itemStr = (item !=null)? 
+                "Que tem " + item.getDescription() + ".\n"
                 :"";
         
         

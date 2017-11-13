@@ -1,5 +1,8 @@
 package zuul;
 
+
+import java.util.Stack;
+
 /**
  *  Esta é a classe principal do jogo World of Zuul. 
  *  
@@ -9,6 +12,7 @@ public class Game
 {
     private Parser parser;
     private Room currentRoom;
+    private Stack<Room> previousRooms;
         
     /**
      * Cria o jogo e inicializa o mapa interno.
@@ -17,6 +21,7 @@ public class Game
     {
         createRooms();
         parser = new Parser();
+        previousRooms = new Stack<>();
     }
 
     /**
@@ -29,7 +34,7 @@ public class Game
       // cria itens
         table = new Item("uma mesa",50);
         chair = new Item ("uma cadeira",20);
-        tv = new Item("TV",15);
+        tv = new Item("uma TV",15);
         // create the rooms
         outside = new Room("fora da entrada principal da universidade");
         theatre = new Room("em um auditório");
@@ -88,6 +93,8 @@ public class Game
         System.out.println();
         printlocationInfo();
         
+        printLocationInfo();
+        
     }
         
     /**
@@ -109,14 +116,20 @@ public class Game
             printHelp();
         else if (commandWord.equals("ir_para"))
             goRoom(command);
-        else if (commandWord.equals("comer"))
-            comer();
         else if (commandWord.equals("sair"))
             wantToQuit = quit(command);
+        else if (commandWord.equals("examinar"))
+            look();
+        else if (commandWord.equals("comer"))
+            eat();
+        else if (commandWord.equals("voltar"))
+            
+        returnRoom(command);
+        
         return wantToQuit;
     }
     public void comer(){
-        System.out.println("Voce comeu e agoraq nao esta com fome.");
+        System.out.println("Voce comeu e agora nao esta com fome.");
         
     }
 
@@ -133,7 +146,7 @@ public class Game
         System.out.println("pela universidade.");
         System.out.println();
         System.out.println("Seus comandos são:");
-        System.out.println("");
+        System.out.println("" + parser.getCommandList());
     }
     
     private void printlocationInfo()
@@ -158,13 +171,13 @@ public class Game
         String direction = command.getSecondWord();
 
         // Try to leave current room.
-        Room nextRoom = null;
-        nextRoom = currentRoom.getExit(direction);
+        Room nextRoom = currentRoom.getExit(direction);
 
         if (nextRoom == null) {
             System.out.println("Não há uma porta!");
         }
         else {
+            previousRooms.push(currentRoom);
             currentRoom = nextRoom;
             
             printlocationInfo();
@@ -188,4 +201,33 @@ public class Game
             return true;  // significa que queremos sair
         }
     }
+
+    private void printLocationInfo() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void look() {
+        printLocationInfo();
+    }
+
+    private void eat() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void returnRoom(Command command) {
+        if(!command.hasSecondWord()){
+            System.out.println("Voltar o quê");
+            
+            }else{
+            currentRoom = PreviousRooms.pop();
+            
+            printLocationInfo();
+        }
+        
+    }
+    
 }
+        
+    
+
+
